@@ -1,0 +1,6 @@
+@Capylender.API_HostAddress = http://localhost:5173
+
+GET {{Capylender.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
