@@ -1,0 +1,83 @@
+# Arquivos de build
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# Arquivos de configuração local
+appsettings.*.json
+!appsettings.json
+!appsettings.Example.json
+
+# Arquivos de IDE e editores
+.vs/
+.vscode/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.dbmdl
+*.jfm
+
+# Arquivos de log
+*.log
+logs/
+
+# Arquivos temporários
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+nupkg/
+
+# Arquivos de cobertura de testes
+*.coverage
+*.coveragexml
+
+# Arquivos de publicação
+*.Publish.xml
+*.pubxml
+*.publishproj
+
+# Arquivos de cache do NuGet
+packages/
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.*.local
+
+# Arquivos de backup
+*.bak
+*.tmp
+*_i.c
+*_p.c
+*_i.h
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc 
