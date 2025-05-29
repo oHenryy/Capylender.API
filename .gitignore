@@ -9,6 +9,7 @@ obj/
 appsettings.*.json
 !appsettings.json
 !appsettings.Example.json
+docker-compose.yml
 
 # Arquivos de IDE e editores
 .vs/
@@ -80,4 +81,15 @@ packages/
 .builds
 *.pidb
 *.svclog
-*.scc 
+*.scc
+
+# Não versionar binários, objetos e arquivos de usuário/IDE
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+secrets.json
+appsettings.*.local.json
+.env 

@@ -1,30 +1,22 @@
 # Acesse https://aka.ms/customizecontainer para saber como personalizar seu contêiner de depuração e como o Visual Studio usa este Dockerfile para criar suas imagens para uma depuração mais rápida.
 
-# Esta fase é usada durante a execução no VS no modo rápido (Padrão para a configuração de Depuração)
+# Imagem base para runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-
-# Esta fase é usada para compilar o projeto de serviço
+# Imagem para build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Capylender.API.csproj", "."]
-RUN dotnet restore "./Capylender.API.csproj"
+COPY ["Capylender.API.csproj", "./"]
+RUN dotnet restore "Capylender.API.csproj"
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "./Capylender.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet publish "Capylender.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-# Esta fase é usada para publicar o projeto de serviço a ser copiado para a fase final
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Capylender.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
-
-# Esta fase é usada na produção ou quando executada no VS no modo normal (padrão quando não está usando a configuração de Depuração)
-FROM base AS final
+# Imagem final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/publish .
+ENV ASPNETCORE_URLS=http://+:8080;http://+:8081
 ENTRYPOINT ["dotnet", "Capylender.API.dll"]
